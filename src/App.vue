@@ -47,35 +47,30 @@ onMounted(() => {
 
 </script>
 <template>
-    <div class="grid grid-rows-[1fr_68px] h-screen">
-        <ScrollArea>
-            <div class="grid grid-cols-1 justify-items-center">
-                <div class="w-[360px] p-4">
-                    <div>
-                        <h1 class="text-2xl font-bold">Creación de Rol</h1>
-                        <small>Completa el formulario para crear un rol de predicación</small>
-                    </div>
-                    <div class="grid gap-2 mt-4">
-                        <div class="grid w-full max-w-sm items-center gap-1.5">
-                            <Label for="title">Título</Label>
-                            <Input type="text" name="title" v-model="form.titulo" />
-                        </div>
-                        <hr class="my-4">
-                        <div v-for="(_, index) in form.dias" class="grid w-full max-w-sm items-center gap-1.5 diafield">
-                            <DiaPredicacionForm :dias="dias" v-model="form.dias[index]"
-                                @delete="handleBorrarDia(index)" />
-                        </div>
-                        <Button :class="[form.dias.length > 0 ? 'mt-4' : '']" @click="handleAgregarDia">
-                            <PlusIcon />
-                            Agregar dia de predición
-                        </Button>
-                    </div>
-                </div>
+    <div class="grid grid-cols-1 justify-items-center mb-[72px]">
+        <div class="w-[360px] p-4">
+            <div>
+                <h1 class="text-2xl font-bold">Creación de Rol</h1>
+                <small>Completa el formulario para crear un rol de predicación</small>
             </div>
-        </ScrollArea>
-        <div class="flex w-full p-4 border-t">
-            <Button class="flex-1 bg-green-600" @click="handleSubmit">Enviar</Button>
+            <div class="grid gap-2 mt-4">
+                <div class="grid w-full max-w-sm items-center gap-1.5">
+                    <Label for="title">Título</Label>
+                    <Input type="text" name="title" v-model="form.titulo" />
+                </div>
+                <hr class="my-4">
+                <div v-for="(_, index) in form.dias" class="grid w-full max-w-sm items-center gap-1.5 diafield">
+                    <DiaPredicacionForm :dias="dias" v-model="form.dias[index]" @delete="handleBorrarDia(index)" />
+                </div>
+                <Button :class="[form.dias.length > 0 ? 'mt-4' : '']" @click="handleAgregarDia">
+                    <PlusIcon />
+                    Agregar dia de predición
+                </Button>
+            </div>
         </div>
+    </div>
+    <div class="fixed bottom-0 flex w-full p-4 border-t h-[72px] bg-white">
+        <Button class="flex-1 bg-green-600" @click="handleSubmit">Enviar</Button>
     </div>
 </template>
 <style>
