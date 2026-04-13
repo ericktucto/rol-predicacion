@@ -1,5 +1,6 @@
 import { addDays, addMonths, format, parseISO } from "date-fns";
 import { es } from 'date-fns/locale';
+import { date2DiaPrediccion } from "./lib/date";
 
 export function mesesDefault() {
     const anio = (new Date()).getFullYear()
@@ -7,7 +8,9 @@ export function mesesDefault() {
     const meses = []
     for (let i = 0; i < 4; i++) {
         const m = parseISO(`${anio}-${mesActual.toString().padStart(2, '0')}-01`)
-        meses.push(format(addMonths(m, i), "MMMM yyyy", { locale: es }).toUpperCase())
+        meses.push(
+            date2DiaPrediccion(addMonths(m, i))
+        )
     }
     return meses
 }
@@ -27,7 +30,7 @@ export function diasDefault() {
 
 export const horariosDefault = ['7:50 AM', '3:50 PM']
 
-export const conductores = [
+export const conductoresDefault = [
     'ERICK TUCTO',
 ]
 

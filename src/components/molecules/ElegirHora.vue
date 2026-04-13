@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { onMounted, reactive, ref } from 'vue';
 import Button from '../ui/button/Button.vue';
-import { Drawer, DrawerContent, DrawerTrigger } from '../ui/drawer';
-import { horariosDefault, str2Time, type Time } from '../../data';
+import { Drawer, DrawerContent, DrawerTrigger, DrawerClose, DrawerHeader, DrawerTitle, DrawerDescription } from '../ui/drawer';
+import { horariosDefault } from '../../data';
 import { MinusIcon, PlusIcon } from 'lucide-vue-next';
-import DrawerClose from '../ui/drawer/DrawerClose.vue';
+import { type Time, str2Time } from '@/lib/time';
 
 const emit = defineEmits<{
     selected: [Time]
@@ -57,20 +57,25 @@ onMounted(() => {
         <DrawerTrigger as-child>
             <Button class="flex-1">
                 <PlusIcon />
-                Elige un horario
+                Agregar un horario
             </Button>
         </DrawerTrigger>
         <DrawerContent>
-            <div class="mx-auto w-[360px] py-4">
-                <h3 class="text-xl font-bold mb-4">Horas predefinidas</h3>
+            <DrawerHeader>
+                <DrawerTitle>Elige un horario</DrawerTitle>
+                <DrawerDescription>Puedes escoger entre los predeterminados y o usar un horario personalizado.
+                </DrawerDescription>
+            </DrawerHeader>
+            <div class="mx-auto w-[360px] p-4">
+                <h3 class="text-lg font-bold mb-4">Horas predefinidas</h3>
                 <div class="flex gap-2 w-full horarios">
                     <DrawerClose v-for="hora in horas">
                         <Button class="w-full" @click="$emit('selected', str2Time(hora))">{{ hora
-                        }}</Button>
+                            }}</Button>
                     </DrawerClose>
                 </div>
                 <hr class="my-4">
-                <h3 class="text-xl font-bold mb-4">Hora personalizada</h3>
+                <h3 class="text-lg font-bold mb-4">Hora personalizada</h3>
                 <div class="grid grid-cols-[120px_120px_120px] justify-items-center my-4">
                     <Button class="rounded-full" @click="addHours">
                         <PlusIcon />
